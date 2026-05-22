@@ -6,6 +6,7 @@
     'js/sections/section-transporte.js',
     'js/sections/section-hogar.js',
     'js/sections/section-trabajo.js',
+    'js/sections/section-ingresos-banca.js',
     'js/sections/section-bienes.js',
     'js/sections/section-progreso.js',
     'js/sections/section-salud.js',

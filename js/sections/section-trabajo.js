@@ -4,7 +4,7 @@
 
   class TrabajoSection extends BaseSection {
     constructor(){
-      super('trabajo','Trabajo e Ingresos');
+      super('trabajo','Trabajo');
     }
 
     getHtml(isActive){
