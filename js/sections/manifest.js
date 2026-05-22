@@ -1,0 +1,20 @@
+(function(){
+  window.DashboardSectionFiles = [
+    'js/sections/section-demografico.js',
+    'js/sections/section-bienestar.js',
+    'js/sections/section-tiempo.js',
+    'js/sections/section-transporte.js',
+    'js/sections/section-hogar.js',
+    'js/sections/section-trabajo.js',
+    'js/sections/section-bienes.js',
+    'js/sections/section-progreso.js',
+    'js/sections/section-salud.js',
+    'js/sections/section-seguridad.js',
+    'js/sections/section-comunal.js',
+    'js/sections/section-ciudad.js',
+    'js/sections/section-confianza.js',
+    'js/sections/section-tic.js',
+    'js/sections/section-politica.js',
+    'js/sections/section-ambiente.js'
+  ];
+})();

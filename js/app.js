@@ -60,5 +60,13 @@
     renderAll();
   }
 
-  document.addEventListener('DOMContentLoaded',init);
+  function waitForSections(){
+    const ready = window.DashboardSectionsReady;
+    if (ready && typeof ready.then === 'function') return ready;
+    return Promise.resolve();
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    waitForSections().then(init);
+  });
 })();
