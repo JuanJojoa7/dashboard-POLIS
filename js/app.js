@@ -7,7 +7,12 @@
       const tab=document.createElement('div');
       tab.className='tab'+(idx===0?' active':'');
       tab.textContent=section.tabLabel;
-      tab.addEventListener('click',()=>Dashboard.setActiveTab(tab,section.id));
+      tab.addEventListener('click',()=>{
+        Dashboard.setActiveTab(tab,section.id);
+        requestAnimationFrame(()=>{
+          Object.values(Dashboard.charts).forEach(c=>{try{c.resize();}catch(e){}});
+        });
+      });
       tabsEl.appendChild(tab);
     });
   }

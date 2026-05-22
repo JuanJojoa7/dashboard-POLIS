@@ -16,6 +16,8 @@
     'js/sections/section-confianza.js',
     'js/sections/section-tic.js',
     'js/sections/section-politica.js',
-    'js/sections/section-ambiente.js'
+    'js/sections/section-ambiente.js',
+    'js/sections/section-confianza-inst.js',
+    'js/sections/section-participacion.js'
   ];
 })();
