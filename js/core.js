@@ -1,4 +1,4 @@
-(function(){
+﻿(function(){
   const Dashboard = window.Dashboard || {};
   window.Dashboard = Dashboard;
 
@@ -29,29 +29,48 @@
     Dashboard.syncFilters();
   };
 
-  Dashboard.getFilteredData = function(){
+  Dashboard.applyFilters = function(data){
     const F=Dashboard.state.filters;
-    return D.filter(r=>{
-      if(F.sx && r["4. ¿Cómo se identifica usted?"]!=+F.sx) return false;
+    if(!Array.isArray(data)) return [];
+    const colSexo="4. ¿Cómo se identifica usted?";
+    const colEtnia="6. De acuerdo a su cultura, pueblo o rasgos físicos usted se reconoce como:";
+    const colCivil="10. Usted actualmente:";
+    const colEstrato="5. ¿Cuál es el estrato socio-económico de su vivienda?";
+    const colEdu="7.1.1 ¿Cuál es el nivel educativo más alto alcanzado por usted (así no haya terminado) y el último grado aprobado en este nivel? NIVEL";
+
+    return data.filter(r=>{
+      if(F.sx){
+        const sx=r[colSexo];
+        if(sx!==undefined&&sx!==null&&sx!=+F.sx) return false;
+      }
       if(F.et){
-        const e=r["6. De acuerdo a su cultura, pueblo o rasgos físicos usted se reconoce como:"];
-        const min=(e!==null&&e!==undefined&&e!==6);
-        if(F.et==='min'&&!min) return false;
-        if(F.et==='no'&&min) return false;
+        const e=r[colEtnia];
+        if(e!==undefined&&e!==null){
+          const min=(e!==6);
+          if(F.et==='min'&&!min) return false;
+          if(F.et==='no'&&min) return false;
+        }
       }
       if(F.cv){
-        const c=r["10. Usted actualmente:"];
-        const con=(c===1||c===4);
-        if(F.cv==='con'&&!con) return false;
-        if(F.cv==='sin'&&con) return false;
+        const c=r[colCivil];
+        if(c!==undefined&&c!==null){
+          const con=(c===1||c===4);
+          if(F.cv==='con'&&!con) return false;
+          if(F.cv==='sin'&&con) return false;
+        }
       }
       if(F.ns){
-        const s=r["5. ¿Cuál es el estrato socio-económico de su vivienda?"];
-        if(F.ns==='bajo'&&!(s<=2)) return false;
-        if(F.ns==='medio'&&!(s===3||s===4)) return false;
-        if(F.ns==='alto'&&!(s>=5)) return false;
+        const s=r[colEstrato];
+        if(s!==undefined&&s!==null){
+          if(F.ns==='bajo'&&!(s<=2)) return false;
+          if(F.ns==='medio'&&!(s===3||s===4)) return false;
+          if(F.ns==='alto'&&!(s>=5)) return false;
+        }
       }
-      if(F.ed && String(r["7.1.1 ¿Cuál es el nivel educativo más alto alcanzado por usted (así no haya terminado) y el último grado aprobado en este nivel? NIVEL"])!==F.ed) return false;
+      if(F.ed){
+        const ed=r[colEdu];
+        if(ed!==undefined&&ed!==null&&String(ed)!==F.ed) return false;
+      }
       return true;
     });
   };
@@ -85,9 +104,13 @@
     constructor(id,tabLabel){
       this.id=id;
       this.tabLabel=tabLabel;
+      this.data=[];
     }
+    getData(){return this.data||[];}
+    setData(data){this.data=Array.isArray(data)?data:[];}
     getHtml(){return '';} // override
     render(){ } // override
   };
   Dashboard.registerSection = function(section){Dashboard.sections.push(section);};
 })();
+

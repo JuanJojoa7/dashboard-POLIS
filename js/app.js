@@ -19,17 +19,23 @@
     });
   }
 
-  function updateHeader(n){
+  function updateHeader(n,total){
     Dashboard.set('hn',n);
-    Dashboard.set('hpct',D.length?Math.round(n/D.length*100)+'%':'\u2014');
+    Dashboard.set('hpct',total?Math.round(n/total*100)+'%':'\u2014');
     Dashboard.set('fcnt','n = '+n);
   }
 
   function renderAll(){
-    const data=Dashboard.getFilteredData();
-    const n=data.length;
-    updateHeader(n);
-    Dashboard.sections.forEach(section=>section.render(data,n));
+    const baseSection=Dashboard.sections[0];
+    const baseData=baseSection?baseSection.getData():[];
+    const baseFiltered=Dashboard.applyFilters(baseData);
+    updateHeader(baseFiltered.length,baseData.length);
+
+    Dashboard.sections.forEach(section=>{
+      const sectionData=section.getData();
+      const filtered=Dashboard.applyFilters(sectionData);
+      section.render(filtered,filtered.length);
+    });
   }
 
   function handleFilterChange(){
