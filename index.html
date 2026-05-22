@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tablero POLIS Cali 2026</title>
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="header">
+  <div><h1>&#x1F4CA; Encuesta Multiprop&oacute;sito &mdash; Pilotaje Cali</h1><p>Tablero interactivo &middot; POLIS &middot; 2026</p></div>
+  <div class="hkpis">
+    <div class="hkpi"><div class="v" id="hn">18</div><div class="l">Encuestados</div></div>
+    <div class="hkpi"><div class="v" id="hpct">100%</div><div class="l">Filtrado</div></div>
+    <div class="hkpi"><div class="v">16</div><div class="l">Secciones</div></div>
+  </div>
+</div>
+<div class="fbar">
+  <label>Sexo<select id="fsx"><option value="">Todos</option><option value="1">Hombre</option><option value="2">Mujer</option></select></label>
+  <label>Etnia<select id="fet"><option value="">Todos</option><option value="min">Minor&iacute;a &eacute;tnica</option><option value="no">No minor&iacute;a</option></select></label>
+  <label>Estado civil<select id="fcv"><option value="">Todos</option><option value="con">Con pareja</option><option value="sin">Sin pareja</option></select></label>
+  <label>NSE<select id="fns"><option value="">Todos</option><option value="bajo">Bajo (1-2)</option><option value="medio">Medio (3-4)</option><option value="alto">Alto (5-6)</option></select></label>
+  <label>Educaci&oacute;n<select id="fed"><option value="">Todos</option><option value="1">Ninguno</option><option value="2">Primaria</option><option value="3">Secundaria</option><option value="4">T&eacute;cnico</option><option value="5">Universitario</option><option value="6">Posgrado</option></select></label>
+  <div class="fcnt" id="fcnt">n = 18</div>
+  <button class="frst" id="f-reset">&#x21BA; Limpiar</button>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="content" id="content"></div>
+
+<script src="js/data.js"></script>
+<script src="js/core.js"></script>
+<script src="js/sections/section-demografico.js"></script>
+<script src="js/sections/section-bienestar.js"></script>
+<script src="js/sections/section-tiempo.js"></script>
+<script src="js/sections/section-transporte.js"></script>
+<script src="js/sections/section-hogar.js"></script>
+<script src="js/sections/section-trabajo.js"></script>
+<script src="js/sections/section-bienes.js"></script>
+<script src="js/sections/section-progreso.js"></script>
+<script src="js/sections/section-salud.js"></script>
+<script src="js/sections/section-seguridad.js"></script>
+<script src="js/sections/section-comunal.js"></script>
+<script src="js/sections/section-ciudad.js"></script>
+<script src="js/sections/section-confianza.js"></script>
+<script src="js/sections/section-tic.js"></script>
+<script src="js/sections/section-politica.js"></script>
+<script src="js/sections/section-ambiente.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+(function(){
+  const Dashboard = window.Dashboard;
+  const { BaseSection, registerSection, avg2, nv, mkChart } = Dashboard;
+
+  class CiudadSection extends BaseSection {
+    constructor(){
+      super('ciudad','Ciudad');
+    }
+
+    getHtml(isActive){
+      return `
+<div class="sec${isActive ? ' active' : ''}" id="s-ciudad">
+  <div class="sech"><h2>&#x1F3D9;&#xFE0F; Satisfacci&oacute;n con la Ciudad</h2><p>Evaluaci&oacute;n de la gesti&oacute;n de la alcald&iacute;a</p></div>
+  <div class="card"><div class="ct">Satisfacci&oacute;n con gesti&oacute;n alcald&iacute;a por dimensi&oacute;n &mdash; Promedio 0-10 (P105)</div><div class="cw xl"><canvas id="c-alc"></canvas></div></div>
+  <div class="card mt"><div class="ct">&Aacute;reas de intervenci&oacute;n del gobierno &mdash; % S&iacute; (P106)</div><div class="cw"><canvas id="c-gova"></canvas></div></div>
+</div>`;
+    }
+
+    render(data,n){
+      const alcLabs=['Seguridad','Salud','Transporte','Empleo','Parques','Educación','Serv. Públicos','Tráfico','Gestión barrio','Salud física/mental','Cultura/Ocio','Turismo','Wi-Fi público','Negocio digital','Empleo digital'];
+      const alcCols=["105.1 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Seguridad","105.2 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Servicios de salud","105.3 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Transporte público","105.4 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Generación de empleo","105.5 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Parques y espacios públicos","105.6 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Educación","105.7 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Servicios públicos","105.8 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Tráfico","105.9 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Gestión en su barrio","105.10 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. -Promoción del cuidado de la salud física y mental","105.11 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Oferta cultural, de ocio y deporte","105.12 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Información turística","105.13 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Wi-Fi público gratuito","105.14 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Servicios en línea para iniciar un nuevo negocio","105.15 Por favor dígame en una escala de 0 a 10, ¿qué tan satisfecho se siente con la gestión de la alcaldía en los siguientes aspectos de la ciudad?, siendo 0 la calificación más baja y 10 la más alta. - Servicios en línea para encontrar empleo"];
+      const alcV=alcCols.map(c=>avg2(nv(data,c)));
+      mkChart('c-alc','bar',alcLabs,[{label:'Promedio (0-10)',data:alcV,backgroundColor:alcV.map(v=>(v||0)>=7?'#10b981':(v||0)>=5?'#f59e0b':'#ef4444'),borderRadius:5,borderWidth:0}],{indexAxis:'y'});
+      const govLabs=['Empleo','Transporte','Vivienda','Seguridad','Tráfico veh.','Espacios púb.','Subsidios','Educación'];
+      const govCols=["106.1. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Empleo","106.2. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Transporte","106.3. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Vivienda","106.4. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Seguridad","106.5. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Trafico Vehícular","106.6. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Mejora Espacios Públicos","106.7. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Subsidios","106.8. ¿En qué áreas de la vida pública puede intervenir el gobierno para aumentar su calidad de vida?: 1=Sí 0=No Educación"];
+      mkChart('c-gova','bar',govLabs,[{label:'% Sí',data:govCols.map(c=>n?Math.round(data.filter(r=>r[c]===1).length/n*100):0),backgroundColor:'#6366f1',borderRadius:5,borderWidth:0}]);
+    }
+  }
+
+  registerSection(new CiudadSection());
+})();
