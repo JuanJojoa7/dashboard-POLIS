@@ -61,7 +61,7 @@
 
       // Nivel educativo - Bar
       const eduFm=freq(data,"Educacion");
-      const eduK=Object.keys(eduFm);
+      const eduK=Object.keys(eduFm).filter(k=>k!=='NA');
       mkChart('c-edu','bar',eduK,[{label:'Personas',data:eduK.map(k=>eduFm[k]),backgroundColor:['#10b981'],borderRadius:5,borderWidth:0}]);
 
       // Discapacidad - Bar

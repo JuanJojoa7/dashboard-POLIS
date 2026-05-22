@@ -79,7 +79,7 @@
   Dashboard.avg2 = function(a){return a.length?+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1):0;};
   Dashboard.pct = function(n,t){return t?Math.round(n/t*100)+'%':'\u2014';};
   Dashboard.set = function(id,v){const e=document.getElementById(id);if(e)e.textContent=(v??'\u2014');};
-  Dashboard.freq = function(data,col,ex=[98,99,null,undefined]){const m={};data.forEach(r=>{const v=r[col];if(v===null||v===undefined||ex.includes(v)||ex.includes(+v))return;m[v]=(m[v]||0)+1;});return m;};
+  Dashboard.freq = function(data,col,ex=[98,99,null,undefined,'.',  'NA']){const m={};data.forEach(r=>{const v=r[col];if(v===null||v===undefined||ex.includes(v)||ex.includes(+v))return;m[v]=(m[v]||0)+1;});return m;};
 
   Dashboard.mkChart = function(id,type,labels,datasets,opts={}){
     if(Dashboard.charts[id]){Dashboard.charts[id].destroy();}
