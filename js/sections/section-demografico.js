@@ -5,6 +5,7 @@
   class DemograficoSection extends BaseSection {
     constructor(){
       super('demografico','Demográfico');
+      this.filterSource=true;
     }
 
     getHtml(isActive){

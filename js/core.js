@@ -5,6 +5,7 @@
   Dashboard.CC = ['#6366f1','#10b981','#f59e0b','#06b6d4','#8b5cf6','#ef4444','#ec4899','#14b8a6','#f97316','#84cc16','#3b82f6','#a78bfa'];
   Dashboard.charts = {};
   Dashboard.state = { filters: { sx:'', et:'', cv:'', ns:'', ed:'' } };
+  Dashboard.defaultFilterKey = 'Codigo';
 
   Dashboard.setActiveTab = function(el,id){
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -75,6 +76,27 @@
     });
   };
 
+  Dashboard.buildFilterIndex = function(data, key){
+    const k = key || Dashboard.defaultFilterKey;
+    const filtered = Dashboard.applyFilters(data);
+    const idx = new Set();
+    filtered.forEach(r=>{
+      const v = r ? r[k] : undefined;
+      if (v !== undefined && v !== null) idx.add(v);
+    });
+    return { index: idx, total: Array.isArray(data)?data.length:0, filteredCount: filtered.length, key: k };
+  };
+
+  Dashboard.filterByIndex = function(data, index, key){
+    if (!Array.isArray(data)) return [];
+    if (!index || !index.size) return data;
+    const k = key || Dashboard.defaultFilterKey;
+    return data.filter(r=>{
+      const v = r ? r[k] : undefined;
+      return v !== undefined && v !== null && index.has(v);
+    });
+  };
+
   Dashboard.nv = function(data,col,ex=[98,99]){
     return data.map(r=>{const v=r[col];return(v===null||v===undefined||ex.includes(v))?null:+v;}).filter(v=>v!==null&&!isNaN(v));
   };
@@ -105,9 +127,13 @@
       this.id=id;
       this.tabLabel=tabLabel;
       this.data=[];
+      this.filterSource=false;
+      this.filterKey=Dashboard.defaultFilterKey;
     }
     getData(){return this.data||[];}
     setData(data){this.data=Array.isArray(data)?data:[];}
+    getFilterData(){return this.getData();}
+    getFilterKey(){return this.filterKey||Dashboard.defaultFilterKey;}
     getHtml(){return '';} // override
     render(){ } // override
   };

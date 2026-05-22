@@ -26,14 +26,16 @@
   }
 
   function renderAll(){
-    const baseSection=Dashboard.sections[0];
-    const baseData=baseSection?baseSection.getData():[];
-    const baseFiltered=Dashboard.applyFilters(baseData);
-    updateHeader(baseFiltered.length,baseData.length);
+    const baseSection=Dashboard.sections.find(s=>s.filterSource) || Dashboard.sections[0];
+    const baseData=baseSection?baseSection.getFilterData():[];
+    const baseKey=baseSection?baseSection.getFilterKey():Dashboard.defaultFilterKey;
+    const filterIndex=Dashboard.buildFilterIndex(baseData,baseKey);
+    updateHeader(filterIndex.filteredCount,filterIndex.total);
 
     Dashboard.sections.forEach(section=>{
       const sectionData=section.getData();
-      const filtered=Dashboard.applyFilters(sectionData);
+      const sectionKey=section.getFilterKey();
+      const filtered=Dashboard.filterByIndex(sectionData,filterIndex.index,sectionKey);
       section.render(filtered,filtered.length);
     });
   }
