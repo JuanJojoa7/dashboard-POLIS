@@ -87,7 +87,7 @@
     Dashboard.charts[id]=new Chart(el,{type,data:{labels,datasets},options:{
       responsive:true,maintainAspectRatio:false,animation:{duration:200},
       plugins:{legend:{display:opts.legend??false,labels:{color:'#94a3b8',font:{size:10},boxWidth:10}},
-        tooltip:{callbacks:{label:ctx=>{const v=ctx.parsed.y??ctx.parsed;return ' '+(ctx.dataset.label||ctx.label)+': '+(typeof v==='number'?Math.round(v*10)/10:v);}}}},
+        tooltip:{callbacks:{label:ctx=>{const v=(opts.indexAxis==='y'?ctx.parsed.x:ctx.parsed.y)??ctx.parsed;return ' '+(ctx.dataset.label||ctx.label)+': '+(typeof v==='number'?Math.round(v*10)/10:v);}}}},
       scales:(type==='pie'||type==='doughnut')?{}:{
         x:{ticks:{color:'#94a3b8',font:{size:9}},grid:{color:'#1e293b'},...(opts.xs||{})},
         y:{ticks:{color:'#94a3b8',font:{size:9}},grid:{color:'#1e293b'},beginAtZero:true,...(opts.ys||{})}
