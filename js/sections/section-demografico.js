@@ -6,52 +6,79 @@
     constructor(){
       super('demografico','Demográfico');
       this.filterSource=true;
+      this.data = [
+        {"Codigo":"E-0001","Edad":38,"Rango":"36-45","Sexo":"Hombre","NSE":4,"Etnia":"Ninguna","Educacion":"Doctorado","Discapacidad":"Sí","EstadoCivil":"Viudo/a"},
+        {"Codigo":"E-0002","Edad":41,"Rango":"36-45","Sexo":"Mujer","NSE":5,"Etnia":"Afrocolombiano","Educacion":"Maestría","Discapacidad":"No","EstadoCivil":"Casado/a"},
+        {"Codigo":"E-0003","Edad":38,"Rango":"36-45","Sexo":"Mujer","NSE":2,"Etnia":"Ninguna","Educacion":"Técnico/Tecnológico","Discapacidad":"Sí","EstadoCivil":"Viudo/a"},
+        {"Codigo":"E-0004","Edad":36,"Rango":"36-45","Sexo":"Mujer","NSE":1,"Etnia":"Ninguna","Educacion":"Técnico/Tecnológico","Discapacidad":"No","EstadoCivil":"Unión libre"},
+        {"Codigo":"E-0005","Edad":37,"Rango":"36-45","Sexo":"Mujer","NSE":3,"Etnia":"Ninguna","Educacion":"Universitario","Discapacidad":"No","EstadoCivil":"Unión libre"},
+        {"Codigo":"E-0006","Edad":35,"Rango":"26-35","Sexo":"Hombre","NSE":3,"Etnia":"Ninguna","Educacion":"Técnico/Tecnológico","Discapacidad":"No","EstadoCivil":"Unión libre"},
+        {"Codigo":"E-0007","Edad":28,"Rango":"26-35","Sexo":"Hombre","NSE":4,"Etnia":"Ninguna","Educacion":"Universitario","Discapacidad":"No","EstadoCivil":"Viudo/a"},
+        {"Codigo":"E-0008","Edad":58,"Rango":"55-65","Sexo":"Mujer","NSE":3,"Etnia":"Afrocolombiano","Educacion":"Técnico/Tecnológico","Discapacidad":"No","EstadoCivil":"Unión libre"},
+        {"Codigo":"E-0009","Edad":61,"Rango":"55-65","Sexo":"Hombre","NSE":2,"Etnia":"Afrocolombiano","Educacion":"Bachillerato/Secundaria","Discapacidad":"No","EstadoCivil":"Unión libre"},
+        {"Codigo":"E-0010","Edad":63,"Rango":"55-65","Sexo":"Mujer","NSE":6,"Etnia":"Ninguna","Educacion":"Especialización","Discapacidad":"No","EstadoCivil":"Unión libre"},
+        {"Codigo":"E-0011","Edad":29,"Rango":"26-35","Sexo":"Mujer","NSE":4,"Etnia":"Ninguna","Educacion":"NA","Discapacidad":"No","EstadoCivil":"Casado/a"},
+        {"Codigo":"E-0012","Edad":24,"Rango":"18-25","Sexo":"Hombre","NSE":4,"Etnia":"Ninguna","Educacion":"Maestría","Discapacidad":"No","EstadoCivil":"Casado/a"},
+        {"Codigo":"E-0013","Edad":22,"Rango":"18-25","Sexo":"Mujer","NSE":4,"Etnia":"Ninguna","Educacion":"Bachillerato/Secundaria","Discapacidad":"No","EstadoCivil":"Viudo/a"},
+        {"Codigo":"E-0014","Edad":32,"Rango":"26-35","Sexo":"Hombre","NSE":4,"Etnia":"Ninguna","Educacion":"Universitario","Discapacidad":"No","EstadoCivil":"Casado/a"},
+        {"Codigo":"E-0015","Edad":31,"Rango":"26-35","Sexo":"Hombre","NSE":5,"Etnia":"Ninguna","Educacion":"NA","Discapacidad":"No","EstadoCivil":"Viudo/a"},
+        {"Codigo":"E-0016","Edad":33,"Rango":"26-35","Sexo":"Mujer","NSE":4,"Etnia":"Ninguna","Educacion":"Universitario","Discapacidad":"No","EstadoCivil":"Casado/a"},
+        {"Codigo":"E-0017","Edad":34,"Rango":"26-35","Sexo":"Mujer","NSE":4,"Etnia":"Ninguna","Educacion":"Maestría","Discapacidad":"No","EstadoCivil":"Casado/a"},
+        {"Codigo":"E-0018","Edad":22,"Rango":"18-25","Sexo":"Hombre","NSE":1,"Etnia":"Ninguna","Educacion":"Bachillerato/Secundaria","Discapacidad":"No","EstadoCivil":"Viudo/a"}
+      ];
     }
 
     getHtml(isActive){
       return `
 <div class="sec${isActive ? ' active' : ''}" id="s-demografico">
   <div class="sech"><h2>&#x1F464; Datos Demogr&aacute;ficos</h2><p>Perfil sociodemogr&aacute;fico de los encuestados</p></div>
-  <div class="g4"><div class="kpi"><div class="v" id="d-n">18</div><div class="l">Total encuestados</div></div><div class="kpi g"><div class="v" id="d-edad">&mdash;</div><div class="l">Edad promedio</div></div><div class="kpi y"><div class="v" id="d-muj">&mdash;</div><div class="l">% Mujeres</div></div><div class="kpi c"><div class="v" id="d-disc">&mdash;</div><div class="l">% Con discapacidad</div></div></div>
-  <div class="g3"><div class="card"><div class="ct">Sexo (P4)</div><div class="cw"><canvas id="c-sexo"></canvas></div></div><div class="card"><div class="ct">Estrato Socioecon&oacute;mico (P5)</div><div class="cw"><canvas id="c-estrato"></canvas></div></div><div class="card"><div class="ct">Nivel Educativo (P7)</div><div class="cw"><canvas id="c-edu"></canvas></div></div><div class="card"><div class="ct">Etnia / Pueblo (P6)</div><div class="cw"><canvas id="c-etnia"></canvas></div></div><div class="card"><div class="ct">Estado Civil (P10)</div><div class="cw"><canvas id="c-civil"></canvas></div></div><div class="card"><div class="ct">Grupos de edad (P2)</div><div class="cw"><canvas id="c-edad"></canvas></div></div></div>
+  <div class="g2"><div class="kpi"><div class="v" id="d-n">18</div><div class="l">Total encuestados</div></div><div class="kpi g"><div class="v" id="d-edad">&mdash;</div><div class="l">Edad promedio</div></div></div>
+  <div class="g3"><div class="card"><div class="ct">Sexo</div><div class="cw"><canvas id="c-sexo"></canvas></div></div><div class="card"><div class="ct">NSE</div><div class="cw"><canvas id="c-nse"></canvas></div></div><div class="card"><div class="ct">Pertenencia &eacute;tnica</div><div class="cw"><canvas id="c-etnia"></canvas></div></div><div class="card"><div class="ct">Nivel educativo</div><div class="cw"><canvas id="c-edu"></canvas></div></div><div class="card"><div class="ct">Discapacidad</div><div class="cw"><canvas id="c-disc"></canvas></div></div><div class="card"><div class="ct">Estado civil</div><div class="cw"><canvas id="c-civil"></canvas></div></div><div class="card"><div class="ct">Grupos de edad</div><div class="cw"><canvas id="c-rango"></canvas></div></div></div>
 </div>`;
     }
 
     render(data,n){
       set('d-n',n);
-      const anos=data.map(r=>r["2. Año de nacimiento"]).filter(v=>v&&v>1900&&v<2015);
-      set('d-edad',anos.length?Math.round(2026-anos.reduce((a,b)=>a+b,0)/anos.length):'\u2014');
-      const muj=data.filter(r=>r["4. ¿Cómo se identifica usted?"]===2).length;
-      set('d-muj',pct(muj,n));
-      const disc=data.filter(r=>r["9. En su hogar, ¿Usted o alguien cuenta con algún tipo de discapacidad física y/o mental?"]===1).length;
-      set('d-disc',pct(disc,n));
+      
+      // Edad promedio
+      const edades=data.map(r=>r["Edad"]).filter(v=>v&&v>0&&v<150);
+      set('d-edad',edades.length?Math.round(edades.reduce((a,b)=>a+b,0)/edades.length):'\u2014');
 
-      mkChart('c-sexo','doughnut',['Hombre','Mujer'],[{data:[data.filter(r=>r["4. ¿Cómo se identifica usted?"]===1).length,data.filter(r=>r["4. ¿Cómo se identifica usted?"]===2).length],backgroundColor:['#6366f1','#ec4899'],borderWidth:0}],{legend:true});
+      // Sexo - Doughnut
+      const sexoFm=freq(data,"Sexo");
+      const sexoK=Object.keys(sexoFm).sort();
+      mkChart('c-sexo','doughnut',sexoK,[{data:sexoK.map(k=>sexoFm[k]),backgroundColor:['#6366f1','#ec4899'],borderWidth:0}],{legend:true});
 
-      const estFm=freq(data,"5. ¿Cuál es el estrato socio-económico de su vivienda?");
-      const estK=Object.keys(estFm).sort((a,b)=>+a-+b);
-      mkChart('c-estrato','bar',estK.map(k=>'Estrato '+k),[{label:'Personas',data:estK.map(k=>estFm[k]),backgroundColor:CC,borderRadius:5,borderWidth:0}]);
+      // NSE - Bar
+      const nseFm=freq(data,"NSE");
+      const nseK=Object.keys(nseFm).sort((a,b)=>+a-+b);
+      mkChart('c-nse','bar',nseK.map(k=>'Estrato '+k),[{label:'Personas',data:nseK.map(k=>nseFm[k]),backgroundColor:CC,borderRadius:5,borderWidth:0}]);
 
-      const eduMap={'1':'Ninguno','2':'Primaria','3':'Secundaria','4':'Técnico','5':'Universitario','6':'Posgrado','7':'Maestría','8':'Doctorado','9':'Especializ.'};
-      const eduFm=freq(data,"7.1.1 ¿Cuál es el nivel educativo más alto alcanzado por usted (así no haya terminado) y el último grado aprobado en este nivel? NIVEL");
-      const eduK=Object.keys(eduFm).sort((a,b)=>+a-+b);
-      mkChart('c-edu','bar',eduK.map(k=>eduMap[k]||k),[{label:'Personas',data:eduK.map(k=>eduFm[k]),backgroundColor:['#10b981'],borderRadius:5,borderWidth:0}]);
+      // Pertenencia étnica - Doughnut
+      const etniaFm=freq(data,"Etnia");
+      const etniaK=Object.keys(etniaFm).sort();
+      mkChart('c-etnia','doughnut',etniaK,[{data:etniaK.map(k=>etniaFm[k]),backgroundColor:CC,borderWidth:0}],{legend:true});
 
-      const etnMap={'1':'Indígena','2':'Gitano','3':'Raizal','4':'Palenquero','5':'Afrocolomb.','6':'Ninguna'};
-      const etnFm=freq(data,"6. De acuerdo a su cultura, pueblo o rasgos físicos usted se reconoce como:");
-      const etnK=Object.keys(etnFm).sort();
-      mkChart('c-etnia','doughnut',etnK.map(k=>etnMap[k]||k),[{data:etnK.map(k=>etnFm[k]),backgroundColor:CC,borderWidth:0}],{legend:true});
+      // Nivel educativo - Bar
+      const eduFm=freq(data,"Educacion");
+      const eduK=Object.keys(eduFm);
+      mkChart('c-edu','bar',eduK,[{label:'Personas',data:eduK.map(k=>eduFm[k]),backgroundColor:['#10b981'],borderRadius:5,borderWidth:0}]);
 
-      const civMap={'1':'Casado/a','2':'Separado/a','3':'Soltero/a','4':'Unión libre','5':'Viudo/a'};
-      const civFm=freq(data,"10. Usted actualmente:");
-      const civK=Object.keys(civFm).sort();
-      mkChart('c-civil','doughnut',civK.map(k=>civMap[k]||k),[{data:civK.map(k=>civFm[k]),backgroundColor:CC,borderWidth:0}],{legend:true});
+      // Discapacidad - Bar
+      const discFm=freq(data,"Discapacidad");
+      const discK=['No','Sí'].filter(k=>k in discFm);
+      mkChart('c-disc','bar',discK,[{label:'Personas',data:discK.map(k=>discFm[k]),backgroundColor:['#06b6d4'],borderRadius:5,borderWidth:0}]);
 
-      const edades=anos.map(a=>2026-a);
-      const bins=['18-25','26-35','36-45','46-55','56-65','65+'];
-      const bc=[0,0,0,0,0,0];
-      edades.forEach(e=>{if(e<=25)bc[0]++;else if(e<=35)bc[1]++;else if(e<=45)bc[2]++;else if(e<=55)bc[3]++;else if(e<=65)bc[4]++;else bc[5]++;});
-      mkChart('c-edad','bar',bins,[{label:'Personas',data:bc,backgroundColor:'#06b6d4',borderRadius:5,borderWidth:0}]);
+      // Estado civil - Doughnut
+      const civilFm=freq(data,"EstadoCivil");
+      const civilK=Object.keys(civilFm).sort();
+      mkChart('c-civil','doughnut',civilK,[{data:civilK.map(k=>civilFm[k]),backgroundColor:CC,borderWidth:0}],{legend:true});
+
+      // Grupos de edad (Rango) - Bar
+      const rangoFm=freq(data,"Rango");
+      const rangoOrder=['18-25','26-35','36-45','46-55','55-65'];
+      const rangoK=rangoOrder.filter(k=>k in rangoFm);
+      mkChart('c-rango','bar',rangoK,[{label:'Personas',data:rangoK.map(k=>rangoFm[k]),backgroundColor:'#06b6d4',borderRadius:5,borderWidth:0}]);
     }
   }
 

@@ -33,45 +33,20 @@
   Dashboard.applyFilters = function(data){
     const F=Dashboard.state.filters;
     if(!Array.isArray(data)) return [];
-    const colSexo="4. ¿Cómo se identifica usted?";
-    const colEtnia="6. De acuerdo a su cultura, pueblo o rasgos físicos usted se reconoce como:";
-    const colCivil="10. Usted actualmente:";
-    const colEstrato="5. ¿Cuál es el estrato socio-económico de su vivienda?";
-    const colEdu="7.1.1 ¿Cuál es el nivel educativo más alto alcanzado por usted (así no haya terminado) y el último grado aprobado en este nivel? NIVEL";
+    
+    // Mapeo de filtros a columnas simplificadas
+    const colSexo="Sexo";
+    const colEtnia="Etnia";
+    const colCivil="EstadoCivil";
+    const colEstrato="NSE";
+    const colEdu="Educacion";
 
     return data.filter(r=>{
-      if(F.sx){
-        const sx=r[colSexo];
-        if(sx!==undefined&&sx!==null&&sx!=+F.sx) return false;
-      }
-      if(F.et){
-        const e=r[colEtnia];
-        if(e!==undefined&&e!==null){
-          const min=(e!==6);
-          if(F.et==='min'&&!min) return false;
-          if(F.et==='no'&&min) return false;
-        }
-      }
-      if(F.cv){
-        const c=r[colCivil];
-        if(c!==undefined&&c!==null){
-          const con=(c===1||c===4);
-          if(F.cv==='con'&&!con) return false;
-          if(F.cv==='sin'&&con) return false;
-        }
-      }
-      if(F.ns){
-        const s=r[colEstrato];
-        if(s!==undefined&&s!==null){
-          if(F.ns==='bajo'&&!(s<=2)) return false;
-          if(F.ns==='medio'&&!(s===3||s===4)) return false;
-          if(F.ns==='alto'&&!(s>=5)) return false;
-        }
-      }
-      if(F.ed){
-        const ed=r[colEdu];
-        if(ed!==undefined&&ed!==null&&String(ed)!==F.ed) return false;
-      }
+      if(F.sx && r[colSexo] !== F.sx) return false;
+      if(F.et && r[colEtnia] !== F.et) return false;
+      if(F.cv && r[colCivil] !== F.cv) return false;
+      if(F.ns && +r[colEstrato] !== +F.ns) return false;
+      if(F.ed && r[colEdu] !== F.ed) return false;
       return true;
     });
   };
