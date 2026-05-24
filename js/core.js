@@ -2,7 +2,7 @@
   const Dashboard = window.Dashboard || {};
   window.Dashboard = Dashboard;
 
-  Dashboard.CC = ['#6366f1','#10b981','#f59e0b','#06b6d4','#8b5cf6','#ef4444','#ec4899','#14b8a6','#f97316','#84cc16','#3b82f6','#a78bfa'];
+  Dashboard.CC = ['#2ec4b6','#f5a623','#4da6ff','#e05c7a','#4caf8a','#a78bfa','#ffca6e','#5ee0d4','#f97316','#84cc16','#c084fc','#fb7185'];
   Dashboard.charts = {};
   Dashboard.state = { filters: { sx:'', et:'', cv:'', ns:'', ed:'' } };
   Dashboard.defaultFilterKey = 'Codigo';
@@ -86,11 +86,11 @@
     const el=document.getElementById(id);if(!el)return;
     Dashboard.charts[id]=new Chart(el,{type,data:{labels,datasets},options:{
       responsive:true,maintainAspectRatio:false,animation:{duration:200},
-      plugins:{legend:{display:opts.legend??false,labels:{color:'#94a3b8',font:{size:10},boxWidth:10}},
-        tooltip:{callbacks:{label:ctx=>{const v=(opts.indexAxis==='y'?ctx.parsed.x:ctx.parsed.y)??ctx.parsed;return ' '+(ctx.dataset.label||ctx.label)+': '+(typeof v==='number'?Math.round(v*10)/10:v);}}}},
+      plugins:{legend:{display:opts.legend??false,labels:{color:'#7a90b8',font:{size:10,family:"'DM Mono', monospace"},boxWidth:10}},
+        tooltip:{backgroundColor:'#0f1525',borderColor:'#1e2d4a',borderWidth:1,titleColor:'#dce6f5',bodyColor:'#7a90b8',padding:10,callbacks:{label:ctx=>{const v=(opts.indexAxis==='y'?ctx.parsed.x:ctx.parsed.y)??ctx.parsed;return ' '+(ctx.dataset.label||ctx.label)+': '+(typeof v==='number'?Math.round(v*10)/10:v);}}}},
       scales:(type==='pie'||type==='doughnut')?{}:{
-        x:{ticks:{color:'#94a3b8',font:{size:9}},grid:{color:'#1e293b'},...(opts.xs||{})},
-        y:{ticks:{color:'#94a3b8',font:{size:9}},grid:{color:'#1e293b'},beginAtZero:true,...(opts.ys||{})}
+        x:{ticks:{color:'#7a90b8',font:{size:9,family:"'DM Mono', monospace"}},grid:{color:'#141d32'},...(opts.xs||{})},
+        y:{ticks:{color:'#7a90b8',font:{size:9,family:"'DM Mono', monospace"}},grid:{color:'#141d32'},beginAtZero:true,...(opts.ys||{})}
       },
       ...(opts.indexAxis?{indexAxis:opts.indexAxis}:{})
     }});
